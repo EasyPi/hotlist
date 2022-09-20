@@ -1,0 +1,41 @@
+name: hotlist
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 * * * *'
+
+jobs:
+  weibo:
+    runs-on: ubuntu-latest
+    services:
+      chrome:
+        image: browserless/chrome
+        ports:
+          - 3000:3000
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          wget https://github.com/mgdm/htmlq/releases/download/v0.4.0/htmlq-x86_64-linux.tar.gz
+          tar xzf htmlq-x86_64-linux.tar.gz
+          sudo mv htmlq /usr/local/bin/
+      - run: npm install
+      - run: bash baidu.sh > baidu.json
+      - run: node weibo.js > weibo.json
+      - run: bash zhihu.sh > zhihu.json
+      - run: jq -e 'length > 0' baidu.json
+      - run: jq -e 'length > 0' weibo.json
+      - run: jq -e 'length > 0' zhihu.json
+      - id: date
+        run: echo "::set-output name=dt::$(date +%Y%m%d-%H%M%S)"
+      - uses: softprops/action-gh-release@v1
+        with:
+          tag_name: hotlist-${{ steps.date.outputs.dt }}
+          files: |
+            baidu.json
+            weibo.json
+            weibo.png
+            zhihu.json
