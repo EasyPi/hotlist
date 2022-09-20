@@ -22,10 +22,10 @@ jobs:
       - run: node weibo.js > weibo.json
       - run: jq -e 'length > 0' weibo.json
       - id: date
-        run: echo "::set-output name=dt::$(date +%FT%T)"
+        run: echo "::set-output name=dt::$(date +%Y%m%d-%H%M%S)"
       - uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.date.outputs.dt }}
+          tag_name: hotlist-${{ steps.date.outputs.dt }}
           files: |
             weibo.json
             weibo.png
