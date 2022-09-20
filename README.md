@@ -1,6 +1,6 @@
 hotlist
 =======
 
-- [ ] baidu
+- [x] baidu
 - [x] weibo
-- [ ] zhihu
+- [x] zhihu
