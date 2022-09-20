@@ -30,7 +30,7 @@ jobs:
       - run: jq -e 'length > 0' weibo.json
       - run: jq -e 'length > 0' zhihu.json
       - id: date
-        run: echo "::set-output name=dt::$(date +%Y%m%d-%H%M%S)"
+        run: echo "::set-output name=dt::$(TZ=UTC date +%Y%m%d-%H%M%S)"
       - uses: softprops/action-gh-release@v1
         with:
           tag_name: hotlist-${{ steps.date.outputs.dt }}
