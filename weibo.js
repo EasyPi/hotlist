@@ -28,6 +28,7 @@ const puppeteer = require('puppeteer-core');
         title: getText(title),
         score: getNumber(getText(score)),
         tags: Array.from(tags).map((e) => e.innerText.trim()).concat(isTop ? ['置顶'] : []),
+        url: `https://s.weibo.com/weibo?q=%23${encodeURIComponent(getText(title))}%23`,
       };
     });
   });
