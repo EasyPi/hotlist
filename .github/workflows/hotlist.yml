@@ -23,12 +23,11 @@ jobs:
           tar xzf htmlq-x86_64-linux.tar.gz
           sudo mv htmlq /usr/local/bin/
       - run: npm install
-      - run: bash baidu.sh > baidu.json
-      - run: node weibo.js > weibo.json
-      - run: bash zhihu.sh > zhihu.json
-      - run: jq -e 'length > 0' baidu.json
-      - run: jq -e 'length > 0' weibo.json
-      - run: jq -e 'length > 0' zhihu.json
+      - run: |
+          bash baidu.sh > baidu.json
+          bash toutiao.sh > toutiao.json
+          bash zhihu.sh > zhihu.json
+          node weibo.js > weibo.json
       - id: date
         run: echo "::set-output name=dt::$(TZ=UTC date +%Y%m%d-%H%M%S)"
       - uses: softprops/action-gh-release@v1
@@ -36,6 +35,7 @@ jobs:
           tag_name: hotlist-${{ steps.date.outputs.dt }}
           files: |
             baidu.json
+            toutiao.json
+            zhihu.json
             weibo.json
             weibo.png
-            zhihu.json
