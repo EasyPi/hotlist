@@ -6,6 +6,8 @@ hotlist (Propaganda in China)
 ## Supported Sites
 
 - [x] baidu
+- [x] bilibili
+- [x] sogou
 - [x] toutiao
 - [x] weibo
 - [x] zhihu

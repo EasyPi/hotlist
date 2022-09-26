@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 /*
- * weibo hotlist
+ * bilibili hotlist
  */
 
 const puppeteer = require('puppeteer-core');
 
 (async () => {
   //const browser = await puppeteer.launch();
-  const browser = await puppeteer.connect({browserWSEndpoint: 'ws://172.16.1.21:3000'});
+  const browser = await puppeteer.connect({browserWSEndpoint: 'ws://127.0.0.1:3000'});
   const page = await browser.newPage();
   await page.setViewport({width: 1280, height: 720});
   await page.goto('https://search.bilibili.com/all');
