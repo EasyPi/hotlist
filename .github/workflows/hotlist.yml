@@ -28,6 +28,7 @@ jobs:
           bash sogou.sh > sogou.json
           bash toutiao.sh > toutiao.json
           bash zhihu.sh > zhihu.json
+          node bilibili.js > bilibili.json
           node weibo.js > weibo.json
       - id: date
         run: echo "::set-output name=dt::$(TZ=UTC date +%Y%m%d-%H%M%S)"
@@ -39,5 +40,7 @@ jobs:
             sogou.json
             toutiao.json
             zhihu.json
+            bilibili.json
+            bilibili.png
             weibo.json
             weibo.png
